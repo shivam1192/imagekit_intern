@@ -13,8 +13,9 @@ const schemaobject = Joi.object({
 Route.post("/",async(req,res)=>{
     const {username,useremail,password} = req.body
     const validate = schemaobject.validate(req.body)
-    if(!validate){
-        res.send(validation.error.details[0].message)
+    if(validate.error){
+        res.send(validate.error.details[0].message)
+        // res.send("error occur")
     }
     else{
         const email_duplicate = await MongooseModel.findOne({useremail:useremail});
@@ -34,7 +35,7 @@ Route.post("/",async(req,res)=>{
                    const savepost = await new_user.save();
                    res.send(savepost._id)
             }catch(error){
-                console.log(error)
+                console.log("hello")
             }
         }   
     }
