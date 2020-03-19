@@ -21,3 +21,6 @@ validated for all subsequent attempts to register for that IP address.
 - Mongodb
 - react.js
 
+## External API used
+ - https://www.ipify.org/  (For extracting user ip address)
+ - https://www.google.com/recaptcha/intro/v3.html   (For using google recaptche functionality)
