@@ -1,23 +1,22 @@
 const mongoose = require('mongoose')
 const mongooseSchema = new mongoose.Schema({
-    username:{
+    ip:{
         type:String,
         required:true,
         min:2
     },
-    useremail:{
-        type:String,
+    count:{
+        type:Number,
         required:true,
-        min:2
+        min:0
     },
-    password:{
+    date:{
         type:String,
         required:true,
-        min:2
     }
 })
-const mongooseModel = mongoose.model("users",mongooseSchema)
+const mongooseModelip = mongoose.model("ipstore",mongooseSchema)
 
 
 
-module.exports = mongooseModel
+module.exports = mongooseModelip

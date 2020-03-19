@@ -3,6 +3,7 @@ const MongooseModel = require('../schema')
 const Joi = require('@hapi/joi')
 const Route = express.Router()
 const bcrypt = require('bcrypt')
+const MongooseModelip = require('../schemaip')
 
 const schemaobject = Joi.object({
     username:Joi.string().required().min(2),
@@ -38,6 +39,53 @@ Route.post("/",async(req,res)=>{
                 console.log("hello")
             }
         }   
+    }
+})
+
+Route.post('/submit',async(req,res)=>{
+     let {ip,count,date} = req.body
+     const gotip = await MongooseModelip.findOne({ip:ip});
+     if(gotip&&(gotip.date==date)){
+        const set= await MongooseModelip.updateOne({_id:gotip._id},{$set : {count: gotip.count+1}})
+        try{
+            res.send(gotip)
+        }catch(error){
+         console.log(error)
+     }
+    }
+     else if(gotip&&!(gotip.date==date)){
+        const set= await MongooseModelip.updateOne({_id:gotip._id},{$set : {count: 0}})
+        const seto= await MongooseModelip.updateOne({_id:gotip._id},{$set : {date: date}})
+
+        const updateip = await MongooseModelip.findOne({ip:ip})
+        try{
+            res.send(updateip)
+        }catch(error){
+         console.log(error)
+     }
+     }
+     else{
+        const newip = new MongooseModelip({
+            ip,
+            count:0,
+            date,
+        })
+        try{
+            const saveip = await newip.save();
+            res.send(saveip)
+     }catch(error){
+         console.log(error)
+     }
+     }
+})
+
+Route.post("/count",async(req,res)=>{
+    const {ip} = req.body
+    const gotip = await MongooseModelip.findOne({ip:ip});
+    if(gotip){
+        res.send(gotip)
+    }else{
+        res.json({count:0})
     }
 })
 
