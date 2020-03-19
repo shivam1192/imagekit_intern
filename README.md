@@ -11,7 +11,7 @@ validated for all subsequent attempts to register for that IP address.
  - run npm install to install all the dependency.
  - Add your mongodb cluster link in environment variable.
  - run cd backend and node app.js, this will start your server
- - To start the react server got to frontend and then run npm start
+ - To start the react server go to frontend and then run npm start
  - This will start your app
 
 
