@@ -5,7 +5,7 @@ they should be presented with a captcha (Google Recaptcha). The captcha should b
 validated for all subsequent attempts to register for that IP address.
 
 
-## Starting App
+## Starting App?
  - Clone the project.
  - Ensure you have node installed in your system.
  - run npm install to install all the dependency.
